@@ -1,0 +1,8 @@
+{
+  "internal_server_error": "Erreur interne du serveur",
+  "login_success": "Connexion réussie",
+  "user_not_found": "Utilisateur non trouvé",
+  "user_already_exists": "L'utilisateur existe déjà",
+  "invalid_password":"Mot de passe invalide",
+  "user_created":"Utilisateur créé"
+}

@@ -1,0 +1,21 @@
+{
+  "internal_server_error": "Internal server error",
+  "login_success": "Login success",
+  "user_not_found": "User not found",
+  "user_already_exists": "User already exists",
+  "invalid_password":"Invalid password",
+  "user_created":"User created",
+  "users_retrieved":"Users retrieved",
+  "Please_authenticate":"Please authenticate",
+  "enter_valid_token":"Please enter a valid token",
+  "token_expired":"Token expired",
+  "invalid_token":"Invalid token",
+  "token_not_active":"Token not active",
+  "user_updated":"User Update",
+  "OTP_send":"OTP send successfully",
+  "change_password":"Password change successfully",
+  "verfiy_otp":"Otp verfiy successfully",
+  "Invalid_OTP":"Invalid OTP",
+  "old_password_not_match":"old password not match"
+
+}
