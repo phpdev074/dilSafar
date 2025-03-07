@@ -67,6 +67,7 @@ export const verifyotp = async (req,res,next) => {
       return sendResponse(req, res, 400, "Otp did not match", {});
     }
     const user = await models.User.findById(id)
+    let profileStatus = user.myProfileStatus
     if(user.myProfileStatus){
       const expiresIn = process.env.JWT_EXPIRATION_TIME
 
@@ -80,9 +81,15 @@ export const verifyotp = async (req,res,next) => {
         .toLocaleString("en-GB", { hour12: false })
         .replace(",", "");
 
-      return sendResponse(req, res, 200, "User login successfully",{token,expiresAt});
+      return sendResponse(req, res, 200, "User login successfully",{token,expiresAt,profileStatus});
     }
-    return sendResponse(req, res,200,"Otp verified successfully",id)
+    else{
+      const token = ""
+
+      const expiresAt = ""
+      return sendResponse(req, res, 200, "otp verified successfully",{token,expiresAt,profileStatus});
+    }
+    // return sendResponse(req, res,200,"Otp verified successfully",id)
   } catch (error) {
     next(error);
   }
