@@ -1,7 +1,6 @@
 import nodemailer from "nodemailer"
 
-export const sendEmail = async(sendEmail,otp) => {
-try {
+
 const transporter = nodemailer.createTransport({
    service: 'gmail',
    auth: {
@@ -18,16 +17,19 @@ const transporter = nodemailer.createTransport({
    }
  });
 const sendEmail = async (to, subject, html) => {
+  console.log('Sending email to:', to);
  const mailOptions = {
    from: 'phpdev074@gmail.com',
    to,
-   subject: "Your OTP Code",
-   text: `Your OTP COde is:${otp}`
+   subject,
+   html,
  };
 
+ try {
    const info = await transporter.sendMail(mailOptions);
    console.log('Email sent: ', info.messageId);
- }} catch (error) {
+ } catch (error) {
    console.error('Error sending email: ', error);
  }
-}
+};
+export default sendEmail;

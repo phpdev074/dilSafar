@@ -1,5 +1,5 @@
 import { Router } from "express";
-import {  phone, register, verifyotp } from "../../controller/authController.js";
+import {  checkEmail, forgotPassword, phone, register, resetPassword, verifyForgotOtp, verifyotp } from "../../controller/authController.js";
 
 
 const router = Router();
@@ -7,6 +7,9 @@ const router = Router();
 router.route('/phone').post(phone)
 router.route('/verifyotp').post(verifyotp)
 router.route('/register').post(register);
-// router.route('/checkemail').post(checkemail)
+router.route('/checkEmail').post(checkEmail)
+router.route('/forgotPassword').post(forgotPassword)
+router.route('/verifyForgotOtp').post(verifyForgotOtp)
+router.route('/resetPassword').post(resetPassword)
 
 export default router;
