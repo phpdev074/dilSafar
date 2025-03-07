@@ -8,6 +8,7 @@ import { hashPassword } from "../utils/helper.js";
 
 export const phone = async (req, res, next) => {
     try {
+      console.log("====>>>>here")
         const { countryCode,phone,iso } = req.body;
       console.log("req.body",req.body)
         if (!phone || !iso || !countryCode  ) {
@@ -20,7 +21,7 @@ export const phone = async (req, res, next) => {
           const otp = Math.floor(100000 + Math.random() * 900000);
           const otpExpires = new Date(Date.now() + 10 * 60000);
 
-          user = await models.User.findOneAndUpdate({ countryCode,phone,iso, otp, otpExpires });
+          user = await models.User.findOneAndUpdate({_id:user._id},{ countryCode,phone,iso, otp, otpExpires },{new:true});
 
           return sendResponse(req, res, 200, "OTP sent successfully", { 
             _id: user._id, 
@@ -85,11 +86,10 @@ export const verifyotp = async (req,res,next) => {
     }
     else{
       const token = ""
-
       const expiresAt = ""
       return sendResponse(req, res, 200, "otp verified successfully",{token,expiresAt,profileStatus});
     }
-    // return sendResponse(req, res,200,"Otp verified successfully",id)
+   
   } catch (error) {
     next(error);
   }

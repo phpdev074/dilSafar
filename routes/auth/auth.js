@@ -3,7 +3,7 @@ import {  checkEmail, forgotPassword, phone, register, resetPassword, verifyForg
 
 
 const router = Router();
-
+    console.log("===>>inside router")
 router.route('/phone').post(phone)
 router.route('/verifyotp').post(verifyotp)
 router.route('/register').post(register);

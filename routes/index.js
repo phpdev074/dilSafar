@@ -13,7 +13,6 @@ import adminRoutes from './admin/admin.js'
 const router = Router();
 
 const apiRouter = Router();
-
 apiRouter.use('/', auth);
 apiRouter.use('/category',categoryRoute)
 apiRouter.use('/product',productRoutes)
