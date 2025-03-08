@@ -13,7 +13,7 @@ const userSchema = new Schema({
     list: { type: [String] },
     socialType: { type: String },
     socialId: { type: String },
-    dob: { type: Date },
+    dob: { type: String },
     bio:{type: String},
     gender: { type: String },
     image: { type:[ String] },
