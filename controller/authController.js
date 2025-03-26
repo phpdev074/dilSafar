@@ -82,7 +82,18 @@ export const verifyotp = async (req,res,next) => {
         .toLocaleString("en-GB", { hour12: false })
         .replace(",", "");
 
-      return sendResponse(req, res, 200, "User login successfully",{token,expiresAt,profileStatus});
+      return sendResponse(req, res, 200, "User login successfully",{_id: user._id,
+        name: user.name,
+        email: user.email,
+        phoneDetails: {
+          countryCode: user.countryCode,
+          phone: user.phone,
+          iso: user.iso,
+        },
+        image: user.image,
+        dob: user.dob,
+        gender: user.gender,
+        list: user.list,token,expiresAt,profileStatus});
     }
     else{
       const token = ""
