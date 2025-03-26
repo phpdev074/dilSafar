@@ -108,8 +108,8 @@ export const verifyotp = async (req,res,next) => {
 export const checkEmail = async (req,res,next) => {
   try {
     const {name,email,password} = req.body;
-    if(!name ||!email ||!password) {
-      return sendResponse(req, res, 400, "name, email, and password are required", {});
+    if(!email ) {
+      return sendResponse(req, res, 400, "email is required", {});
     }
     const existingUser = await models.User.findOne({email});
     if(existingUser){
@@ -124,9 +124,9 @@ export const register = async (req, res, next) => {
   try {
     const { id,image, dob, gender, list, name, email, password } = req.body;
 
-    if (!name || !email || !password) {
-      return sendResponse(req, res, 400, "name, email, and password are required", {});
-    }
+    // if (!name || !email || !password) {
+    //   return sendResponse(req, res, 400, "name, email, and password are required", {});
+    // }
 
     const hashedPassword = await hashPassword(password);
     const users = await models.User.findOne({ email });
@@ -141,7 +141,7 @@ export const register = async (req, res, next) => {
       image:imageArray,
       list: listArray,
       password: hashedPassword,
-      myProfileStatus: isProfileComplete ? true : false, 
+      myProfileStatus:  true , 
       
     },{ new: true });
  
