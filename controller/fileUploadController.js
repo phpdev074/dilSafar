@@ -7,7 +7,7 @@ export const fileUpdload = async (req, res, next) => {
     }
 
     const uploadedFiles = req.files.files; 
-
+    
     const filesArray = Array.isArray(uploadedFiles) ? uploadedFiles : [uploadedFiles];
 
     const uploadedFileUrls = []; 
