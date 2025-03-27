@@ -122,7 +122,7 @@ export const checkEmail = async (req,res,next) => {
 };
 export const register = async (req, res, next) => {
   try {
-    const { id,image, dob, gender, list, name, email, password } = req.body;
+    const { id,image, dob, gender, list, name, email, password,deviceToken,deviceType } = req.body;
 
     // if (!name || !email || !password) {
     //   return sendResponse(req, res, 400, "name, email, and password are required", {});
@@ -133,7 +133,7 @@ export const register = async (req, res, next) => {
     const imageArray = typeof image === "string" ? image.split(",") : image;
     const listArray = typeof list === "string" ? list.split(",") : list;
 
-    const isProfileComplete = image && dob && gender && list && name && email && password;
+    const isProfileComplete = image && dob && gender && list && name && email && password && deviceToken && deviceType;
    
     const user = await models.User.findByIdAndUpdate(
       id,{
@@ -165,6 +165,8 @@ export const register = async (req, res, next) => {
       gender: user.gender,
       list: user.list,
       myProfileStatus: user.myProfileStatus,
+      deviceToken: user.deviceToken,
+      deviceType: user.deviceType,
       token, });
   } catch (error) {
     next(error);
@@ -228,5 +230,53 @@ export const resetPassword = async (req, res, next) => {
       sendResponse(req, res, 200, "Password reset successfully", user);
   } catch (error) {
     next(error);
+  }
+}
+export const updateUser = async (req, res, next) => {
+  try {
+    const {id} = req.query;
+   console.log("=====id",id)
+
+    if (!id) {
+      return sendResponse(req, res, 400, "Id is required", {});
+    }
+
+    delete req.body.password;
+    delete req.body.email;
+
+    const user = await models.User.findByIdAndUpdate(id, req.body, {
+      new: true,
+    });
+    if (!user) {
+      return sendResponse(req, res, 404, "User not Found", {});
+    }
+    sendResponse(req, res, 200, "User updated successfully", user);
+  } catch (error) {
+    next(error);
+  }
+};
+export const getUser = async (req,res,next) => {
+  try {
+    const {id} = req.query;
+    if(!id){
+      sendResponse(req,res,404,"Please provide id")
+    }
+    const user = await models.User.findById(id).select("-password")
+    sendResponse(req,res,200, "User info retrieve successfully",user)
+  } catch (error) {
+    next(error)
+  }
+}
+export const getAllUser = async (req,res,next) => {
+  try {
+    const id = req.user.userId;
+    if(!id){
+      sendResponse(req,res,404,"Please provide id")
+    }
+    const user = await models.User.find({ _id: { $ne: id } })
+
+    sendResponse(req,res,200, "User info retrieve successfully",user)
+  } catch (error) {
+    next(error)
   }
 }

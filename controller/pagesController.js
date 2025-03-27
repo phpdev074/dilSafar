@@ -9,22 +9,19 @@ export const pages = async (req, res, next) => {
       return sendResponse(req, res, 400, "Type, title, description are required", {});
     }
      
-    const newPage = new models.Page({
+    const response = await models.Page.create({
       type,
       title,
       description,
-    });
-
-    const response = await newPage.save(); 
+    }); 
 
     sendResponse(req, res, 200, "Page created successfully", response);
   } catch (error) {
     next(error);  
   }
 };
-
 export const getPageInfo = async (req, res, next) => {
-  const { type } = req.query; 
+  const { type } = req.body; 
   console.log(req.query)
   try {
     if (!type) {
@@ -65,5 +62,4 @@ export const updatePageInfo = async (req, res, next) => {
     } catch (error) {
       next(error);  
     }
-  };
-  
+};

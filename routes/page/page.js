@@ -4,8 +4,6 @@ import {pages, getPageInfo, updatePageInfo} from "../../controller/pagesControll
 
 const router = Router();
 
-router.route('/').post(pages);
-router.route('/getPageInfo').get(getPageInfo)
-router.route('/updatePageInfo').put(updatePageInfo)
+router.route('/').post(pages).get(getPageInfo).put(updatePageInfo)
 
 export default router;

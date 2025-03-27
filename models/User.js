@@ -25,8 +25,9 @@ const userSchema = new Schema({
     notification: { type: Boolean, default:true},
     isActive: { type: Boolean, default: false },
     isBlocked: { type: Boolean, default: false},
-    role:{type: String, default:"user"}
-   
+    role:{type: String, default:"user"},
+    deviceToken:{type: String},
+    deviceType: { type: String, enum:['android','ios','web'],default:'android' }
 }, {
     timestamps: true
 });
