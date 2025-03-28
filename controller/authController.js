@@ -124,9 +124,9 @@ export const register = async (req, res, next) => {
   try {
     const { id,image, dob, gender, list, name, email, password,deviceToken,deviceType } = req.body;
 
-    // if (!name || !email || !password) {
-    //   return sendResponse(req, res, 400, "name, email, and password are required", {});
-    // }
+    if (!id) {
+      return sendResponse(req, res, 400, "Id is required", {});
+    }
 
     const hashedPassword = await hashPassword(password);
     const users = await models.User.findOne({ email });
